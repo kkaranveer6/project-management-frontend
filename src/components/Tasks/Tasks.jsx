@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import Board from '@lourenci/react-kanban';
 import '@lourenci/react-kanban/dist/styles.css';
 import SideBar from '../Sidebar/Sidebar';
-import './BoardTest.css';
 
 
 export default function Tasks(props){

@@ -7,9 +7,17 @@ import Contact from './components/Contact/Contact';
 import Settings from './components/Settings/Settings';
 import './App.css';
 
+import Menubar from './components/Sidebar/Menubar';
+
 
 function App(){
-  const [currentRoute, routeChange] = useState('tasks');
+  const [currentRoute, routeChange] = useState('test');
+
+  if(currentRoute === 'test'){
+    return(
+      <Menubar/>
+    );
+  }
 
   if(currentRoute === 'login'){
     return(<Login routeChange={routeChange}/>);
