@@ -2,13 +2,14 @@ import React, {useState} from 'react';
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import SideBar from './components/Sidebar/Sidebar';
-import TaskView from './components/Tasks/TaskView';
+import Tasks from './components/Tasks/Tasks';
 import Contact from './components/Contact/Contact';
 import Settings from './components/Settings/Settings';
 import './App.css';
 
+
 function App(){
-  const [currentRoute, routeChange] = useState('register');
+  const [currentRoute, routeChange] = useState('tasks');
 
   if(currentRoute === 'login'){
     return(<Login routeChange={routeChange}/>);
@@ -20,7 +21,7 @@ function App(){
 
 
   if(currentRoute === 'tasks'){
-    return(<TaskView routeChange={routeChange}/>);
+    return(<Tasks routeChange={routeChange}/>);
   }
 
   if(currentRoute === 'contact'){
