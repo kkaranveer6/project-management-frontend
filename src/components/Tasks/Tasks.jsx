@@ -34,14 +34,6 @@ export default function Tasks(props){
 
       const [boardData, setBoardData] = useState(board);
       
-      const handleCardMove = (data) => setBoardData(data);
-      const handleCardRemove = (data) => setBoardData(data);
-      const handleCardAdd = (data) => setBoardData(data);
-      const handleColumnMove = (data) => setBoardData(data);
-      const handleColumnRename = (data) => setBoardData(data);
-      const handleColumnRemove = (data) => setBoardData(data);
-      const handleColumnAdd = (data) => setBoardData(data)
-
       return(
           <div>
             <SideBar routeChange={props.routeChange} content={
@@ -53,12 +45,12 @@ export default function Tasks(props){
                     allowAddCard = {{on: 'top'}}
                     onNewCardConfirm = {newCard => ({id: new Date().getTime(), ...newCard})}
                     onNewColumnConfirm = {newColumn => ({id: new Date().getTime(), ...newColumn})}
-                    onCardNew = {data => handleCardAdd(data)}
-                    onCardRemove = {data => handleCardRemove(data)}
-                    onCardDragEnd = {data => handleCardMove(data)}
-                    onColumnDragEnd = {data => handleColumnMove(data)}
-                    onColumnRename = {data => handleColumnRename(data)}
-                    onColumnRemove = {data => handleColumnRemove(data)}
+                    onCardNew = {data => setBoardData(data)}
+                    onCardRemove = {data => setBoardData(data)}
+                    onCardDragEnd = {data => setBoardData(data)}
+                    onColumnDragEnd = {data => setBoardData(data)}
+                    onColumnRename = {data => setBoardData(data)}
+                    onColumnRemove = {data => setBoardData(data)}
                     onColumnNew = {data => setBoardData(data)}
                     initialBoard = {boardData}>
                 </Board>

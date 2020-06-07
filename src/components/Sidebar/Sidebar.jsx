@@ -139,9 +139,9 @@ export default function Sidebar(props) {
               <ListItemText primary={'Contact'}/>
             </ListItem>
 
-            <ListItem button key={'Settings'} onClick={() => props.routeChange('settings')}>
+            {/* <ListItem button key={'Settings'} onClick={() => props.routeChange('settings')}>
               <ListItemText primary={'Settings'}/>
-            </ListItem>
+            </ListItem> */}
 
             <ListItem button key={'Logout'} onClick={() => props.routeChange('login')}>
               <ListItemText primary={'Logout'}/>

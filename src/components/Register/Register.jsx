@@ -1,12 +1,12 @@
 import React from 'react';
 import Card from '@material-ui/core/Card';
 
-import './Register.css'
+import './Register.css';
 
 function Register(props){
         
     return(
-        <div className='containter'>
+        <div>
             <nav>
                 <ul>
                     <li>
@@ -16,7 +16,7 @@ function Register(props){
                     </li>
                 </ul>
             </nav>
-            <div className='register-form'>
+            <div className='register-form container'>
                 <Card className='register-card'>
                     <h3>Register Page</h3>
                     <div>
