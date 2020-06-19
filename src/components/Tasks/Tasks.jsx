@@ -33,27 +33,45 @@ export default function Tasks(props){
       }
 
       const [boardData, setBoardData] = useState(board);
-      
+
       return(
           <div>
             <SideBar routeChange={props.routeChange} content={
-                <Board
-                    allowRemoveCard
-                    allowRenameColumn
-                    allowRemoveColumn
-                    allowAddColumn
-                    allowAddCard = {{on: 'top'}}
-                    onNewCardConfirm = {newCard => ({id: new Date().getTime(), ...newCard})}
-                    onNewColumnConfirm = {newColumn => ({id: new Date().getTime(), ...newColumn})}
-                    onCardNew = {data => setBoardData(data)}
-                    onCardRemove = {data => setBoardData(data)}
-                    onCardDragEnd = {data => setBoardData(data)}
-                    onColumnDragEnd = {data => setBoardData(data)}
-                    onColumnRename = {data => setBoardData(data)}
-                    onColumnRemove = {data => setBoardData(data)}
-                    onColumnNew = {data => setBoardData(data)}
-                    initialBoard = {boardData}>
-                </Board>
+                <div>
+                  <Board
+                      allowRemoveCard
+                      allowRenameColumn
+                      allowRemoveColumn
+                      allowAddColumn
+                      allowAddCard = {{on: 'top'}}
+                      onNewCardConfirm = {newCard => ({id: new Date().getTime(), ...newCard})}
+                      onNewColumnConfirm = {newColumn => ({id: new Date().getTime(), ...newColumn})}
+                      onCardNew = {data => setBoardData(data)}
+                      onCardRemove = {(board, column, card) => {
+                        console.log(column, card);
+                        setBoardData(board);
+                      }}
+                      onCardDragEnd = {(board, column, source, destination) => {
+                        console.log(source, destination);
+                        setBoardData(board);
+                      }}
+                      onColumnDragEnd = {(board, column, source, destination) => {
+                        console.log(source, destination);
+                        setBoardData(board)
+                      }}
+                      onColumnRename = {data => setBoardData(data)}
+                      onColumnRemove = {(board, column, card) => {
+                        board.columns.map((boardColumn, index) => {
+                          if(boardColumn.title === column.title){
+                            console.log(index);
+                          }
+                        })
+                        setBoardData(board);
+                      }}
+                      onColumnNew = {data => setBoardData(data)}
+                      initialBoard = {boardData}>
+                  </Board>
+                </div>
               }/>
           </div>
         );

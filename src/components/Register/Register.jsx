@@ -1,10 +1,32 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Card from '@material-ui/core/Card';
 
 import './Register.css';
 
 function Register(props){
-        
+    
+    const [email, setEmail] = useState('');
+    const [name, setName] = useState('');
+    const [password, setPassword] = useState('');
+
+    async function handleRegister(event){
+        event.preventDefault();
+        await fetch('http://localhost:3000/login', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+                email: email,
+                name: name,
+				password: password
+			})
+		})
+        .then(res => res.json())
+        .then(data => console.log(data))
+		.catch(err => console.log(err))
+    }
+
     return(
         <div>
             <nav>
@@ -26,18 +48,24 @@ function Register(props){
                                 <input 
                                     type="text" 
                                     name="email"
+                                    value={email}
+                                    onInput={event => setEmail(event.target.value)}
                                 />
                                 <label>Name:</label>
                                 <input 
                                     type="text" 
                                     name="email"
+                                    value={name}
+                                    onInput={event => setName(event.target.value)}
                                 />
                                 <label>Password:</label>
                                 <input 
                                     type="password" 
                                     name="password"
+                                    value={password}
+                                    onInput={event => setPassword(event.target.value)}
                                 />
-                                <button type="submit" onClick={() => props.routeChange('tasks')}>
+                                <button type="submit" onClick={handleRegister}>
                                     Submit
                                 </button>
                             </form>
