@@ -11,7 +11,7 @@ function Register(props){
 
     async function handleRegister(event){
         event.preventDefault();
-        await fetch('http://localhost:3000/login', {
+        await fetch('http://localhost:3000/register', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -65,7 +65,7 @@ function Register(props){
                                     value={password}
                                     onInput={event => setPassword(event.target.value)}
                                 />
-                                <button type="submit" onClick={handleRegister}>
+                                <button type="submit" onClick={() => props.routeChange('tasks')}>
                                     Submit
                                 </button>
                             </form>
