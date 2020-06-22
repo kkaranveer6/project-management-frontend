@@ -22,7 +22,9 @@ function Register(props){
 				password: password
 			})
 		})
-        .then(res => res.json())
+        .then(res => {
+            if(res.status === 200) props.routeChange('tasks');
+        })
         .then(data => console.log(data))
 		.catch(err => console.log(err))
     }
@@ -65,7 +67,7 @@ function Register(props){
                                     value={password}
                                     onInput={event => setPassword(event.target.value)}
                                 />
-                                <button type="submit" onClick={() => props.routeChange('tasks')}>
+                                <button onClick={handleRegister}>
                                     Submit
                                 </button>
                             </form>

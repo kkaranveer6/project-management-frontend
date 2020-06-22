@@ -7,7 +7,7 @@ import Contact from './components/Contact/Contact';
 import './App.css';
 
 const App = () => {
-  const [currentRoute, routeChange] = useState('register');
+  const [currentRoute, routeChange] = useState('login');
 
   switch (currentRoute){
     case 'tasks':

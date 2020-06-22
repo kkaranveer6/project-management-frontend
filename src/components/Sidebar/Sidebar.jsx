@@ -89,6 +89,14 @@ export default function Sidebar(props) {
     setOpen(false);
   };
 
+  async function handleLogout(event){
+    event.preventDefault();
+    await fetch('http://localhost:3000/logout').then(res => {
+      if(res.status === 200) props.routeChange('login');
+    })
+    
+  }
+
   return (
     <div className='container'>
       <div className={classes.root}>
@@ -143,7 +151,7 @@ export default function Sidebar(props) {
               <ListItemText primary={'Settings'}/>
             </ListItem> */}
 
-            <ListItem button key={'Logout'} onClick={() => props.routeChange('login')}>
+            <ListItem button key={'Logout'} onClick={handleLogout}>
               <ListItemText primary={'Logout'}/>
             </ListItem>
         </List>

@@ -8,31 +8,65 @@ export default function Tasks(props){
     var board = {
         columns: [
           {
-            id: 1,
-            title: 'Backlog',
+            id: 4, 
             cards: [
               {
-                id: 1,
-                title: 'Add card',
-                description: 'Add capability to add a card in a column'
-              },
-            ]
-          },
-          {
-            id: 2,
-            title: 'Doing',
-            cards: [
+                id: 1592449103689,
+                title: "title", 
+                description: "description"
+              }, 
               {
-                id: 2,
-                title: 'Drag-n-drop support',
-                description: 'Move a card between the columns'
-              },
-            ]
+                id: 1592449101071,
+                title: "title", 
+                description: "description"
+              }], 
+              title: "test"
           }
+          // {
+          //   id: 1,
+          //   title: 'Backlog',
+          //   cards: [
+          //     {
+          //       id: 1,
+          //       title: 'Add card',
+          //       description: 'Add capability to add a card in a column'
+          //     },
+          //   ]
+          // },
+          // {
+          //   id: 2,
+          //   title: 'Doing',
+          //   cards: [
+          //     {
+          //       id: 2,
+          //       title: 'Drag-n-drop support',
+          //       description: 'Move a card between the columns'
+          //     },
+          //   ]
+          // }
         ]
       }
 
       const [boardData, setBoardData] = useState(board);
+
+      async function handleNewColumn(board){
+        setBoardData(board);
+        console.log(board);
+        let title = 'test' 
+        await fetch('http://localhost:3000/addcolumn', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            TeamID: 1,
+            title: title
+          })
+        })
+        .then(res => res.json())
+        .then(data => console.log(data))
+        .catch(error => console.log(error))
+      }
 
       return(
           <div>
@@ -68,7 +102,7 @@ export default function Tasks(props){
                         })
                         setBoardData(board);
                       }}
-                      onColumnNew = {data => setBoardData(data)}
+                      onColumnNew = {(board) => handleNewColumn(board)}
                       initialBoard = {boardData}>
                   </Board>
                 </div>
