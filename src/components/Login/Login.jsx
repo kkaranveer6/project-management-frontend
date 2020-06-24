@@ -22,7 +22,8 @@ function Login(props){
 			})
 		})
         .then(res => {
-            if(res.status === 200) props.routeChange('tasks');
+            console.log(res);
+            // if(res.status === 200) props.routeChange('tasks');
         })
 		.catch(err => console.log(err))
     }
