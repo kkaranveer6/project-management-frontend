@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Card from '@material-ui/core/Card';
 import './Login.css';
 
@@ -7,23 +7,46 @@ function Login(props){
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    useEffect(() => {
+        let token = localStorage.getItem('token');
+        if(token){
+            fetch('http://localhost:3001/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    token: token
+            })})
+            .then(res => {
+                console.log(res)
+                if(res.status === 200) props.routeChange('tasks');
+            })
+            .catch(err => console.log(err));
+        }
+    }, []);
 
-
-    async function handleLogin(event){
+    const handleLogin = (event) => {
         event.preventDefault();
-        await fetch('http://localhost:3000/login', {
-			method: 'POST',
+        fetch('http://localhost:3001/login', {
+            method: 'POST',
 			headers: {
-				'Content-Type': 'application/json'
-			},
+                'Content-Type': 'application/json'
+            },
 			body: JSON.stringify({
                 email: email,
 				password: password
-			})
+            })
 		})
         .then(res => {
-            console.log(res);
-            // if(res.status === 200) props.routeChange('tasks');
+            if(res.status === 200) {
+                props.routeChange('tasks');
+            }
+            return res.json();
+        })
+        .then(data => {
+            let token = data.token;
+            localStorage.setItem('token', token);
         })
 		.catch(err => console.log(err))
     }
@@ -44,7 +67,7 @@ function Login(props){
                     <h3>Login Page</h3>
                     <div>
                         <div>
-                            <form>
+                            <form onSubmit={handleLogin}>
                                 <label>Email:</label>
                                 <input 
                                     type="text" 
@@ -57,7 +80,7 @@ function Login(props){
                                     name="password"
                                     onInput={event => setPassword(event.target.value)}
                                 />
-                                <button onClick={event => handleLogin(event)}>Submit</button>
+                                <button>Submit</button>
                             </form>
                         </div>
                     </div>

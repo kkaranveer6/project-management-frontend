@@ -23,7 +23,7 @@ function Register(props){
 			})
 		})
         .then(res => {
-            if(res.status === 200) props.routeChange('tasks');
+            if(res.status === 200) props.routeChange('login');
         })
         .then(data => console.log(data))
 		.catch(err => console.log(err))
