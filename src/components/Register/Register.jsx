@@ -10,23 +10,24 @@ function Register(props){
     const [password, setPassword] = useState('');
 
     async function handleRegister(event){
-        event.preventDefault();
-        await fetch('http://localhost:3000/register', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-                email: email,
-                name: name,
-				password: password
-			})
-		})
-        .then(res => {
-            if(res.status === 200) props.routeChange('login');
-        })
-        .then(data => console.log(data))
-		.catch(err => console.log(err))
+        props.routeChange('login')
+        // event.preventDefault();
+        // await fetch('http://localhost:3000/register', {
+		// 	method: 'POST',
+		// 	headers: {
+		// 		'Content-Type': 'application/json'
+		// 	},
+		// 	body: JSON.stringify({
+        //         email: email,
+        //         name: name,
+		// 		password: password
+		// 	})
+		// })
+        // .then(res => {
+        //     if(res.status === 200) props.routeChange('login');
+        // })
+        // .then(data => console.log(data))
+		// .catch(err => console.log(err))
     }
 
     return(
